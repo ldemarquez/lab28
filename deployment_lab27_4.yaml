@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demarl-mylab27
+  labels:
+    app: webnginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginxwebpod
+  template:
+    metadata:
+      labels:
+        app: nginxwebpod
+    spec:
+      containers:
+      - name: nginx
+        image: ldemarquez/lab4repository:1.0.0 
+        
+---
+apiVersion: v1 
+kind: Service 
+metadata: 
+    name: demarlmylab27 
+spec: 
+   selector: 
+     app: nginxwebpod 
+   type: NodePort
+   ports: 
+        - protocol: TCP 
+          port: 80 
+          targetPort: 80
